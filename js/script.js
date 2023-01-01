@@ -31,3 +31,25 @@ document.querySelectorAll("a").forEach((links) => {
     cursor2.classList.remove("active");
   };
 });
+
+function massage() {
+  var name = document.getElementById("nama");
+  var email = document.getElementById("email");
+  var telpon = document.getElementById("telpon");
+  var pesan = document.getElementById("pesan");
+  const success = document.getElementById("sukses");
+  const danger = document.getElementById("gagal");
+
+  if (name.value === "" || email.value === "" || telpon.value === "" || pesan.value === "") {
+    danger.style.display = "block";
+  } else {
+    setTimeout(() => {
+      name.value = "";
+      email.value = "";
+      telpon.value = "";
+      pesan.value = "";
+    }, 2000);
+
+    success.style.display = "block";
+  }
+}

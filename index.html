@@ -238,13 +238,13 @@
         </div>
       </div>
       <div class="row">
-        <form>
-          <input type="text" placeholder="name" class="box" />
-          <input type="email" id="email" placeholder="email" class="box" />
-          <input type="number" placeholder="number" class="box" />
+        <form name="submit-to-google-sheet">
+          <input type="text" placeholder="name" class="box" name="nama" id="nama" />
+          <input type="email" id="email" placeholder="email" class="box" name="email" id="email" required />
+          <input type="number" placeholder="number" class="box" name="telpon" id="telpon" required />
 
-          <textarea name="" placeholder="massange" id="" cols="30" rows="10"></textarea>
-          <input type="submit" class="btn" value="send massage" />
+          <textarea name="pesan" placeholder="massange" id="pesan" cols="30" rows="10" required></textarea>
+          <input type="submit" class="btn" value="send massage" onclick="massage()" />
         </form>
         <iframe
           class="map"
@@ -257,6 +257,11 @@
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      <div class="massage">
+        <div class="sukses" id="sukses">Pesan anda telah terkirim!</div>
+        <div class="gagal" id="gagal">Pesan tidak terkirim!</div>
+      </div>
+
       <div class="sosmed">
         <h3>More info :</h3>
         <div class="me">
@@ -275,5 +280,17 @@
 
     <!-- custom js link -->
     <script src="js/script.js"></script>
+    <script src="37successfulmsgonsubmit.js"></script>
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbz1fpdzjqV4zNHEN3n6czawBU473usGuHdPf_p1IzXduIRCWa_4axLyxBaI46DBz0fF/exec";
+      const form = document.forms["submit-to-google-sheet"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => console.log("Success!", response))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
   </body>
 </html>
